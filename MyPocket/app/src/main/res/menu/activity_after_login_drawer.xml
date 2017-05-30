@@ -6,6 +6,11 @@
             android:id="@+id/nav_list_data"
             android:icon="@drawable/ic_menu_manage"
             android:title="Data List" />
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Logout"
+            />
     </group>
 
     <item android:title="Other">

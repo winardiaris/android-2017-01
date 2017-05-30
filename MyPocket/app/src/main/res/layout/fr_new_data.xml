@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -11,12 +12,16 @@
         android:text="New Data" />
 
     <EditText
-        android:id="@+id/etDatetime"
+        android:id="@+id/etValue"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Date"
-        android:inputType="date" />
+        android:ems="10"
+        android:hint="Value"
+        android:inputType="textPersonName"
+        tools:inputType="numberDecimal" />
+
     <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/rbType"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -24,14 +29,22 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Debet"
-            android:checked="true"
-            android:onClick="onRadioButtonClicked"/>
-        <RadioButton android:id="@+id/rbKredit"
+            android:checked="true" />
+
+        <RadioButton
+            android:id="@+id/rbCredit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Kredit"
-            android:onClick="onRadioButtonClicked"/>
+            android:padding="10dp"
+            android:text="Credit" />
     </RadioGroup>
+
+    <EditText
+        android:id="@+id/etDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Date"
+        android:inputType="date" />
 
     <EditText
         android:id="@+id/etDescription"
@@ -42,8 +55,15 @@
         android:inputType="textMultiLine" />
 
     <ImageButton
-        android:id="@+id/imageButton"
+        android:id="@+id/ibAddReceipt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/ic_menu_camera" />
+
+    <Button
+        android:id="@+id/btSave"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Save" />
 </LinearLayout>
