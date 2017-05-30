@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import xyz.winardiaris.android.mypocket.fragment.AboutFragment;
 import xyz.winardiaris.android.mypocket.fragment.LoginFragment;
 import xyz.winardiaris.android.mypocket.fragment.RegisterFragment;
+import xyz.winardiaris.android.mypocket.fragment.SettingFragment;
 
 public class BeforeLoginActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -65,7 +66,7 @@ public class BeforeLoginActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            return true;
+            loadFragment(new SettingFragment());
         }
 
         return super.onOptionsItemSelected(item);
