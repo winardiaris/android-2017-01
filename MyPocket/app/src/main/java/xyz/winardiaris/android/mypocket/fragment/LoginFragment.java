@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import xyz.winardiaris.android.mypocket.AfterLoginActivity;
 import xyz.winardiaris.android.mypocket.R;
@@ -36,7 +37,7 @@ public class LoginFragment extends Fragment {
                 Log.d("Username", etUsername_);
                 Log.d("Password", etPassword_);
 
-
+                Toast.makeText(getContext(),"Login successfully",Toast.LENGTH_SHORT).show();
 
 //                jika sukses lanjut
                 Intent afterLoginActivity = new Intent(getContext(), AfterLoginActivity.class);
