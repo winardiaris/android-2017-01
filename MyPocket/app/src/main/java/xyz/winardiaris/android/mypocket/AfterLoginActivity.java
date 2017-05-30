@@ -1,6 +1,8 @@
 package xyz.winardiaris.android.mypocket;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -11,9 +13,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
 import xyz.winardiaris.android.mypocket.fragment.AboutFragment;
 import xyz.winardiaris.android.mypocket.fragment.ListDataFragment;
+import xyz.winardiaris.android.mypocket.fragment.NewDataFragment;
+import xyz.winardiaris.android.mypocket.fragment.SettingFragment;
 
 public class AfterLoginActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -33,6 +40,16 @@ public class AfterLoginActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        FloatingActionButton btAdd = (FloatingActionButton) findViewById(R.id.btAdd);
+        btAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadFragment(new NewDataFragment());
+            }
+        });
+
+
     }
 
     @Override
@@ -61,7 +78,7 @@ public class AfterLoginActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            return true;
+            loadFragment(new SettingFragment());
         }
 
         return super.onOptionsItemSelected(item);
@@ -75,6 +92,12 @@ public class AfterLoginActivity extends AppCompatActivity
 
         if (id == R.id.nav_list_data) {
             loadFragment(new ListDataFragment());
+        } else if (id == R.id.nav_logout){
+
+            Toast.makeText(AfterLoginActivity.this,"Logout",Toast.LENGTH_SHORT).show();
+
+            Intent beforeLoginActivity = new Intent(this.getBaseContext(),BeforeLoginActivity.class);
+            startActivity(beforeLoginActivity);
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_about) {
