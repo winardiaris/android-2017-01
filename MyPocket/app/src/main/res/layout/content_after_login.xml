@@ -8,4 +8,9 @@
     tools:context="xyz.winardiaris.android.mypocket.AfterLoginActivity"
     tools:showIn="@layout/app_bar_after_login">
 
+    <FrameLayout
+        android:id="@+id/fragment_after_login"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="20dp"></FrameLayout>
 </android.support.constraint.ConstraintLayout>

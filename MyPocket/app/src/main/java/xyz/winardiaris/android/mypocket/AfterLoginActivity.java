@@ -12,6 +12,9 @@ import android.view.MenuItem;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 
+import xyz.winardiaris.android.mypocket.fragment.AboutFragment;
+import xyz.winardiaris.android.mypocket.fragment.ListDataFragment;
+
 public class AfterLoginActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -70,18 +73,12 @@ public class AfterLoginActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
+        if (id == R.id.nav_list_data) {
+            loadFragment(new ListDataFragment());
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_about) {
-
+            loadFragment(new AboutFragment());
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -90,7 +87,7 @@ public class AfterLoginActivity extends AppCompatActivity
     }
     private void loadFragment(Fragment fr){
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.fragment_before_login,fr);
+        fragmentTransaction.replace(R.id.fragment_after_login,fr);
         fragmentTransaction.commit();
     }
 }
