@@ -36,6 +36,8 @@ public class LoginFragment extends Fragment {
                 Log.d("Username", etUsername_);
                 Log.d("Password", etPassword_);
 
+
+
 //                jika sukses lanjut
                 Intent afterLoginActivity = new Intent(getContext(), AfterLoginActivity.class);
                 startActivity(afterLoginActivity);
