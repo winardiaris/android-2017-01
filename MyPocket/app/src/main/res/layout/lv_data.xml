@@ -7,43 +7,57 @@
         android:id="@+id/tvDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentTop="true"
+        android:layout_alignEnd="@+id/tvValue"
+        android:layout_below="@+id/tvDate"
+        android:layout_toEndOf="@+id/ivReceipt"
         android:text="Descripiton"
-        android:textSize="18sp" />
+        android:textAlignment="viewStart"
+        android:textSize="14sp" />
 
     <TextView
         android:id="@+id/tvType"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_below="@+id/tvDescription"
-        android:layout_marginTop="46dp"
+        android:layout_marginTop="16dp"
+        android:paddingRight="10dp"
         android:text="C"
         android:textColor="@color/colorAccent"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:layout_below="@+id/tvDescription"
+        android:layout_toEndOf="@+id/ivReceipt" />
 
     <TextView
         android:id="@+id/tvValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="20.000,00"
-        android:textColor="@color/colorPrimary"
+        android:text="20.000, IDR"
+        android:textColor="@color/colorAccent"
         android:textSize="18sp"
         android:textStyle="bold"
         android:typeface="monospace"
+        android:layout_marginEnd="15dp"
         android:layout_alignBaseline="@+id/tvType"
         android:layout_alignBottom="@+id/tvType"
-        android:layout_toStartOf="@+id/tvType"
-        android:layout_marginEnd="11dp" />
+        android:layout_alignParentEnd="true" />
 
     <ImageView
         android:id="@+id/ivReceipt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/tvType"
-        android:layout_alignParentStart="true"
+        android:paddingRight="20dp"
+        app:srcCompat="@mipmap/ic_launcher"
         android:layout_alignParentTop="true"
-        app:srcCompat="@mipmap/ic_launcher" />
+        android:layout_alignParentStart="true"
+        android:layout_alignBottom="@+id/tvType" />
+
+    <TextView
+        android:id="@+id/tvDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/ivReceipt"
+        android:paddingTop="5dp"
+        android:text="May 31, 2017"
+        android:textStyle="bold|italic" />
 
 </RelativeLayout>

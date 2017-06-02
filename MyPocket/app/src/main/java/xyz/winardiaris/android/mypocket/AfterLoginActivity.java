@@ -9,6 +9,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v4.app.Fragment;
@@ -17,6 +18,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
+import xyz.winardiaris.android.mypocket.dao.DataDao;
+import xyz.winardiaris.android.mypocket.domain.DataDomain;
 import xyz.winardiaris.android.mypocket.fragment.AboutFragment;
 import xyz.winardiaris.android.mypocket.fragment.ListDataFragment;
 import xyz.winardiaris.android.mypocket.fragment.NewDataFragment;
@@ -49,7 +56,8 @@ public class AfterLoginActivity extends AppCompatActivity
             }
         });
 
-
+        dummyData();
+        loadFragment(new ListDataFragment());
     }
 
     @Override
@@ -79,6 +87,9 @@ public class AfterLoginActivity extends AppCompatActivity
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             loadFragment(new SettingFragment());
+        } else if(id == R.id.action_refresh){
+            //refresh
+            Log.d("refresh","true");
         }
 
         return super.onOptionsItemSelected(item);
@@ -112,5 +123,55 @@ public class AfterLoginActivity extends AppCompatActivity
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.fragment_after_login,fr);
         fragmentTransaction.commit();
+    }
+
+    private void dummyData(){
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd");
+
+        DataDomain d1 = new DataDomain();
+        d1.setValue(new BigDecimal("9000"));
+        d1.setType("C");
+        try {
+            d1.setDate(format.parse("2017-02-20"));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        d1.setDescription("beli micin");
+        d1.setUserId(1);
+        d1.setReceiptImage("aaa.jpg");
+
+        DataDomain d2 = new DataDomain();
+        d2.setValue(new BigDecimal("900000"));
+        d2.setType("D");
+        try {
+            d2.setDate(format.parse("2017-02-15"));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        d2.setDescription("hadiah vocer gosok");
+        d2.setUserId(1);
+        d2.setReceiptImage("aaa.jpg");
+
+        DataDomain d3 = new DataDomain();
+        d3.setValue(new BigDecimal("50000"));
+        d3.setType("C");
+        try {
+            d3.setDate(format.parse("2017-02-30"));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        d3.setDescription("Beli rinso");
+        d3.setUserId(1);
+        d3.setReceiptImage("aaa.jpg");
+
+
+        Log.d("Dummy Data 1" , d1.toString());
+        DataDao dataDao = new DataDao(this);
+        dataDao.insertData(d1);
+        dataDao.insertData(d2);
+        dataDao.insertData(d3);
+
+
+
     }
 }

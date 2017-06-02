@@ -37,7 +37,7 @@ public class BeforeLoginActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        loadFragment(new AboutFragment());
+        loadFragment(new LoginFragment());
     }
 
     @Override
