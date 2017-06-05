@@ -10,6 +10,7 @@ import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,12 +22,18 @@ import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
+import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
+import xyz.winardiaris.android.mypocket.AfterLoginActivity;
 import xyz.winardiaris.android.mypocket.R;
+import xyz.winardiaris.android.mypocket.dao.DataDao;
+import xyz.winardiaris.android.mypocket.domain.DataDomain;
 
 /**
  * Created by ars on 5/30/17.
@@ -103,7 +110,6 @@ public class NewDataFragment extends Fragment {
 
                 new saveData(getActivity()).execute(v_,t_,d_,de_,r_);
 
-
             }
         });
 
@@ -141,6 +147,7 @@ public class NewDataFragment extends Fragment {
         }
         @Override
         protected String doInBackground(String... params){
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd");
             String result = "error" ;
             ArrayList parameter = new ArrayList();
             parameter.add(0,params[0]);
@@ -148,9 +155,24 @@ public class NewDataFragment extends Fragment {
             parameter.add(2,params[2]);
             parameter.add(3,params[3]);
             parameter.add(4,params[4]);
+//[2000, C, 2017-6-2, bayar tol, arsarsa.jpg]
+            DataDomain dd = new DataDomain();
+            dd.setUserId(1);
+            dd.setValue(new BigDecimal(params[0]));
+            dd.setType(params[1]);
+            try {
+                dd.setDate(format.parse(params[2]));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            dd.setDescription(params[3]);
+            dd.setReceiptImage(params[4]);
 
-            Log.d("data",parameter.toString());
             //add to DB
+            DataDao dataDao = new DataDao(getContext());
+            dataDao.insertData(dd);
+
+            Log.d("data",dd.toString());
             result = "ok";
             return result;
 
@@ -163,9 +185,19 @@ public class NewDataFragment extends Fragment {
             }
             else if(str.equals("ok")){
                 Toast.makeText(getContext(),"Saving successfully",Toast.LENGTH_SHORT).show();
+                gotoListData(NewDataFragment.this.getView());
             }
             Log.d("data onPostExecute",str);
         }
 
+    }
+    public void gotoListData(View v){
+        FragmentTransaction ft = NewDataFragment.this
+                .getActivity().getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.fragment_after_login,new ListDataFragment());
+        ft.commit();
+
+//        Intent afterLoginActivity = new Intent(getContext(), AfterLoginActivity.class);
+//        startActivity(afterLoginActivity);
     }
 }

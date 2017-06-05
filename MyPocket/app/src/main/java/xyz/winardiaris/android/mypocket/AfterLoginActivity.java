@@ -19,10 +19,14 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import java.math.BigDecimal;
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 import xyz.winardiaris.android.mypocket.dao.DataDao;
+import xyz.winardiaris.android.mypocket.dao.DataDao.*;
+import xyz.winardiaris.android.mypocket.dao.DataDbHelper;
 import xyz.winardiaris.android.mypocket.domain.DataDomain;
 import xyz.winardiaris.android.mypocket.fragment.AboutFragment;
 import xyz.winardiaris.android.mypocket.fragment.ListDataFragment;
@@ -55,8 +59,13 @@ public class AfterLoginActivity extends AppCompatActivity
                 loadFragment(new NewDataFragment());
             }
         });
-
+        Log.d("After login before dummy data", "------------------------");
         dummyData();
+
+        DataDao dataDao = new DataDao(getBaseContext());
+        int saldo = dataDao.getSaldo();
+        toolbar.setTitle(NumberFormat.getCurrencyInstance(new Locale("id","id")).format(saldo));
+
         loadFragment(new ListDataFragment());
     }
 
@@ -128,6 +137,18 @@ public class AfterLoginActivity extends AppCompatActivity
     private void dummyData(){
         SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd");
 
+        DataDomain d0 = new DataDomain();
+        d0.setValue(new BigDecimal("0"));
+        d0.setType("D");
+        try {
+            d0.setDate(format.parse("1993-02-02"));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        d0.setDescription("null");
+        d0.setUserId(1);
+        d0.setReceiptImage("aaa.jpg");
+
         DataDomain d1 = new DataDomain();
         d1.setValue(new BigDecimal("9000"));
         d1.setType("C");
@@ -156,7 +177,7 @@ public class AfterLoginActivity extends AppCompatActivity
         d3.setValue(new BigDecimal("50000"));
         d3.setType("C");
         try {
-            d3.setDate(format.parse("2017-02-30"));
+            d3.setDate(format.parse("2017-06-30"));
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -167,11 +188,9 @@ public class AfterLoginActivity extends AppCompatActivity
 
         Log.d("Dummy Data 1" , d1.toString());
         DataDao dataDao = new DataDao(this);
-        dataDao.insertData(d1);
-        dataDao.insertData(d2);
-        dataDao.insertData(d3);
-
-
+//        dataDao.emptyDb();
+//        dataDao.insertData(d0);
 
     }
+
 }

@@ -50,7 +50,6 @@ public class DataAdapter extends ArrayAdapter<DataDomain> {
         TextView tvType = (TextView) convertView.findViewById(R.id.tvType);
         TextView tvDescription = (TextView) convertView.findViewById(R.id.tvDescription);
         ImageView ivReceipt = (ImageView) convertView.findViewById(R.id.ivReceipt);
-        TextView tvSaldo = (TextView) convertView.findViewById(R.id.tvSaldo);
 
         DataDomain d = getItem(position);
         SimpleDateFormat formatter = new SimpleDateFormat("dd mm yy");
@@ -70,14 +69,6 @@ public class DataAdapter extends ArrayAdapter<DataDomain> {
             tCredit += d.getValue().intValue();
         }
         tvType.setText(d.getType());
-//
-//        saldo = (tDebet-tCredit);
-//
-//        Log.d("saldo",saldo.toString());
-//        Log.d("type",d.getType().toString());
-//        Log.d("value",d.getValue().toString());
-//        Log.d("Debet",tDebet.toString());
-
         tvDescription.setText(d.getDescription());
 //        ivReceipt.setImageURI();
 
